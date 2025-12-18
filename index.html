@@ -1,11 +1,5 @@
 
-<?php  
-include 'includes/db.php';
-$stmt=$pdo->query('select count(*) as total from post');
-$result=$stmt->fetch();
-$total=$result['total'];
 
-?>
 
 <!doctype html>
 <html lang="en">
@@ -75,8 +69,6 @@ $total=$result['total'];
         </div>
     </header>
     <!-- Header Ends Here -->
-
-     <p>bonjour le totale <?php echo $total; ?></p>
 
     <!-- Banner Starts Here -->
     <section class="banner"
