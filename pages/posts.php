@@ -9,7 +9,7 @@ if(empty($_SESSION['user_id'])){
 }
 
 $name = $_SESSION['username'];
-$role = $_SESSION['user_role'];
+$role = $_SESSION['role'];
 
 // DELETE Article
 if(isset($_GET['delete']) && is_numeric($_GET['delete'])){

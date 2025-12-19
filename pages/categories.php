@@ -7,7 +7,7 @@ if(empty($_SESSION['user_id'])){
     header('location:login.php');
     exit;
 }
-$role = $_SESSION['user_role'] ?? 'guest';
+$role = $_SESSION['role'] ?? 'guest';
 if($role !== 'admin') {
     header('location:../index.php');
     exit;
@@ -36,6 +36,8 @@ if (isset($_GET['delete'])) {
     header("Location: categories.php?deleted=1");
     exit();
 }
+if(isset($_GET['success'])) showMessage('success', 'Category added successfully!');
+if(isset($_GET['deleted'])) showMessage('success', 'Category deleted successfully!');
 
 // 4. Fetch Categories
 $categories = $pdo->query("SELECT * FROM categories ORDER BY category_id DESC")->fetchAll();

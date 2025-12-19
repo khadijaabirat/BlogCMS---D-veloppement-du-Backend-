@@ -1,37 +1,42 @@
-
 <?php
+session_start();
 
-// Fonction 1: Nettoyer input (sécurité XSS)
-function clean($data) {
-    return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+// Function to check if user is logged in
+function isLoggedIn() {
+    return isset($_SESSION['user_id']);
 }
 
-// Fonction 2: Afficher message
-function showMessage($type, $message) {
-    $colors = [
-        'success' => 'green',
-        'error' => 'red',
-        'warning' => 'yellow'
-    ];
-    
-    $color = $colors[$type];
-    
-    echo "<div style='padding:10px; background-color:light{$color}; color:{$color}; margin:10px 0; border-radius:5px;'>
-            {$message}
-          </div>";
+// Function to redirect
+function redirect($url) {
+    header("Location: $url");
+    exit();
 }
 
-// Fonction 3: Formater date
-function formatDate($date) {
-    return date('d/m/Y H:i', strtotime($date));
+// Function to check if user has a specific role
+function hasRole($role) {
+    if (!isLoggedIn()) return false;
+    return $_SESSION['role'] === $role;
 }
 
-// Fonction 4: Couper texte
-function cutText($text, $length = 100) {
-    if (strlen($text) > $length) {
-        return substr($text, 0, $length) . '...';
+// Function to check if user is admin
+function isAdmin() {
+    return hasRole('admin');
+}
+
+// Function to sanitize input
+function sanitize($data) {
+    return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
+}
+
+// Function into get database connection (if needed globally, currently handled in db.php but good to have a wrapper if we want)
+// Check if user has permission (can be array of allowed roles)
+function requireRole($allowed_roles) {
+    if (!isLoggedIn()) {
+        redirect('login.php');
     }
-    return $text;
+    if (!in_array($_SESSION['role'], $allowed_roles)) {
+        // Redirect to unauthorized page or home
+        redirect('index.php');
+    }
 }
-
 ?>

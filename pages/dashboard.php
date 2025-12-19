@@ -1,5 +1,5 @@
 <?php 
-session_start();
+require_once '../includes/session.php';
 include '../includes/db.php';
 $current_page = 'dashboard';
 if(empty($_SESSION['user_id']) || ($_SESSION['user_role'] ?? '') !== 'admin'){
@@ -345,7 +345,7 @@ $recentPosts = $stmt->fetchAll();
 
       </div>
       <!-- end cards -->
-    </main>
+
     <div fixed-plugin>
       <a
         fixed-plugin-button
@@ -497,7 +497,6 @@ $recentPosts = $stmt->fetchAll();
 
 
     <!-- Main Content -->
-    <main class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
 
 
         <!-- Cards -->
