@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include '../includes/db.php';
+include '../config/db.php';
 $current_page = 'posts';
 // Protection
 if(empty($_SESSION['user_id'])){

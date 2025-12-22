@@ -76,7 +76,7 @@
                 </a>
             </li>
 
-            <?php if($_SESSION['user_role'] === 'admin'): ?>
+            <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
             <!-- Users (Admin only) -->
             <li class="mt-0.5 w-full">
                 <a class="py-2.7 <?= ($current_page == 'users') ? 'shadow-soft-xl rounded-lg bg-white font-semibold' : '' ?> text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 text-slate-700 transition-colors" href="users.php">
